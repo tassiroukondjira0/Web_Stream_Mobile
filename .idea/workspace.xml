@@ -15,8 +15,11 @@
     <list default="true" id="f93001ee-376e-45ef-8a66-b08da0dba8d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/withCmakeObjectPathMax.js" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/withCmakeObjectPathMax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/build-and-publish.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/build-and-publish.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/bump-version.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/bump-version.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,61 +44,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0001566699998001" />
-      <entry key="MS500" value="1.1991905763451762" />
-      <entry key="S2" value="2.4744012496421304" />
-      <entry key="S5" value="4.268604893119697" />
-      <entry key="S10" value="7.0886115523901685" />
-      <entry key="S30" value="14.469451253148776" />
-      <entry key="S60" value="19.978374447513225" />
-      <entry key="M2" value="26.750189609606657" />
-      <entry key="M5" value="37.165853092500214" />
-      <entry key="M10" value="44.76331205399139" />
-      <entry key="M15" value="48.84139797296684" />
-      <entry key="M30" value="57.17273754571923" />
-      <entry key="H1" value="68.2585504609341" />
-      <entry key="H2" value="80.11275435958083" />
-      <entry key="H4" value="95.2047145267146" />
-      <entry key="D1" value="584.10973071981" />
-      <entry key="W1" value="2348.698454579845" />
+      <entry key="MS100" value="1.0000289078256748" />
+      <entry key="MS500" value="1.1577884881618714" />
+      <entry key="S2" value="2.316880470149711" />
+      <entry key="S5" value="4.032978796177185" />
+      <entry key="S10" value="6.244316359391953" />
+      <entry key="S30" value="9.990455194707092" />
+      <entry key="S60" value="12.533030444416571" />
+      <entry key="M2" value="15.998872698292038" />
+      <entry key="M5" value="22.658484422877095" />
+      <entry key="M10" value="31.668867755188682" />
+      <entry key="M15" value="40.672765298657055" />
+      <entry key="M30" value="70.11282894276133" />
+      <entry key="H1" value="119.3343733952015" />
+      <entry key="H2" value="173.6616024328277" />
+      <entry key="H4" value="221.62293253683796" />
+      <entry key="D1" value="728.5521625721145" />
+      <entry key="W1" value="2509.1670116567298" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="4.190795033333609E-242" />
-      <entry key="M15" value="1.2065100588245866E-161" />
-      <entry key="M30" value="3.47348536606182E-81" />
-      <entry key="H1" value="5.893628225517504E-41" />
-      <entry key="H2" value="7.676996955527142E-21" />
-      <entry key="H4" value="8.761847382559939E-11" />
-      <entry key="D1" value="0.02107492061331261" />
-      <entry key="W1" value="0.5761532187687637" />
+      <entry key="S2" value="3.143324743196038E-288" />
+      <entry key="S5" value="9.975983001732105E-116" />
+      <entry key="S10" value="3.158477956505648E-58" />
+      <entry key="S30" value="6.810190859130401E-20" />
+      <entry key="S60" value="2.609634238572602E-10" />
+      <entry key="M2" value="1.615436237854221E-5" />
+      <entry key="M5" value="0.01211479105842898" />
+      <entry key="M10" value="0.1100672115501659" />
+      <entry key="M15" value="0.2296705494846488" />
+      <entry key="M30" value="0.4792395533390883" />
+      <entry key="H1" value="0.6922713003866965" />
+      <entry key="H2" value="0.8320284252275862" />
+      <entry key="H4" value="0.9121559216196423" />
+      <entry key="D1" value="1.0048336076759559" />
+      <entry key="W1" value="1.5698403179283282" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8951652945278258" />
-      <entry key="MS500" value="1.1729327691423224" />
-      <entry key="S2" value="2.4609672033247807" />
-      <entry key="S5" value="4.259323198458486" />
-      <entry key="S10" value="7.08084178286523" />
-      <entry key="S30" value="14.464056887666043" />
-      <entry key="S60" value="19.974470527292013" />
-      <entry key="M2" value="26.747247969043098" />
-      <entry key="M5" value="37.163568460921404" />
-      <entry key="M10" value="44.76155462419623" />
-      <entry key="M15" value="48.839950003439625" />
-      <entry key="M30" value="57.171664251881126" />
-      <entry key="H1" value="68.25776871794231" />
-      <entry key="H2" value="80.11224532585268" />
-      <entry key="H4" value="95.20438465899171" />
-      <entry key="D1" value="584.1301362878245" />
-      <entry key="W1" value="2349.274294857073" />
+      <entry key="MS100" value="0.823615665088388" />
+      <entry key="MS500" value="1.1147450652710116" />
+      <entry key="S2" value="2.296075739623171" />
+      <entry key="S5" value="4.018071235274914" />
+      <entry key="S10" value="6.232264044609663" />
+      <entry key="S30" value="9.980994020056809" />
+      <entry key="S60" value="12.520824095397607" />
+      <entry key="M2" value="15.986464322412617" />
+      <entry key="M5" value="22.660344070813967" />
+      <entry key="M10" value="31.768208197547423" />
+      <entry key="M15" value="40.89142945697994" />
+      <entry key="M30" value="70.58204620243673" />
+      <entry key="H1" value="120.01911591463507" />
+      <entry key="H2" value="174.48879492679822" />
+      <entry key="H4" value="222.53227518104174" />
+      <entry key="D1" value="729.5558841814867" />
+      <entry key="W1" value="2510.736472086822" />
     </decayedShown>
   </component>
   <component name="PackageJsonUpdateNotifier">
@@ -127,31 +130,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/USER/Downloads/Web_Stream_Mobile",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\USER\\Downloads\\Web_Stream_Mobile\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Web_Stream_Mobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.air.settings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\USER\\Downloads\\Web_Stream_Mobile\\node_modules\\typescript\\lib&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Web_Stream_Mobile" />
@@ -220,6 +224,13 @@
       <workItem from="1795115190928" duration="27252000" />
       <workItem from="1795190532109" duration="16072000" />
       <workItem from="1795215891250" duration="17875000" />
+      <workItem from="1795383865964" duration="148000" />
+      <workItem from="1795384155113" duration="2336000" />
+      <workItem from="1795386791284" duration="5015000" />
+      <workItem from="1795393870523" duration="1887000" />
+      <workItem from="1795396088288" duration="2611000" />
+      <workItem from="1795399737733" duration="3232000" />
+      <workItem from="1795423954527" duration="4350000" />
     </task>
     <servers />
   </component>

@@ -20,19 +20,21 @@ export default function RootLayout() {
   // Réveiller le serveur Render au démarrage
   useEffect(() => {
     let cancelled = false;
+    let woke = false;
     const wakeUp = async () => {
       try {
+        woke = await Api.wakeServer(1);
+        if (!cancelled) {
+          setIsWakingServer(false);
+          SplashScreen.hideAsync().catch(() => {});
+        }
+      } catch (e) {
         if (!cancelled) {
           setIsWakingServer(false);
           SplashScreen.hideAsync().catch(() => {});
         }
         if (!woke) {
           console.warn('Le serveur Render n\'a pas répondu après plusieurs tentatives.');
-        }
-      } catch (e) {
-        if (!cancelled) {
-          setIsWakingServer(false);
-          SplashScreen.hideAsync().catch(() => {});
         }
         console.warn('Erreur lors du réveil du serveur:', e);
       }
@@ -65,32 +67,35 @@ export default function RootLayout() {
     const checkForNewBuild = async () => {
       try {
         const lastKnownDate = await AsyncStorage.getItem(LAST_BUILD_DATE_KEY);
+        const result = await Api.checkLatestBuild();
 
         if (cancelled) return;
 
-          // Si c'est la première fois ou si la date a changé → nouveau build
-          if (lastKnownDate !== result.latestBuild.buildDate) {
-            Alert.alert(
-              'Mise à jour disponible',
-              'Une nouvelle mise à jour est disponible.',
-              [
-                {
-                  text: 'Plus tard',
-                  style: 'cancel',
+        if (!result.latestBuild) return;
+
+        // Si c'est la première fois ou si la date a changé → nouveau build
+        if (lastKnownDate !== result.latestBuild.buildDate) {
+          Alert.alert(
+            'Mise à jour disponible',
+            'Une nouvelle mise à jour est disponible.',
+            [
+              {
+                text: 'Plus tard',
+                style: 'cancel',
+              },
+              {
+                text: 'Télécharger',
+                onPress: () => {
+                  AsyncStorage.setItem(LAST_BUILD_DATE_KEY, result.latestBuild!.buildDate);
+                  router.push('/download');
                 },
-                {
-                  text: 'Télécharger',
-                  onPress: () => {
-                    AsyncStorage.setItem(LAST_BUILD_DATE_KEY, result.latestBuild!.buildDate);
-                    router.push('/download');
-                  },
-                },
-              ]
-            );
-          }
+              },
+            ]
+          );
         }
 
         // Si c'est la première ouverture et qu'aucun build n'est connu, stocker la date
+        if (!lastKnownDate) {
           await AsyncStorage.setItem(LAST_BUILD_DATE_KEY, result.latestBuild.buildDate);
         }
       } catch (e) {

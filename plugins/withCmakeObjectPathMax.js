@@ -1,9 +1,9 @@
 const { withGradleProperties } = require('@expo/config-plugins');
 
 const PROPERTY_KEY = 'expo.android.cmakeObjectPathMax';
-// 200 garde les chemins d'objets CMake sous la limite Windows de 260 caractères.
-// Expo force 1024 par défaut, ce qui empêche CMake de raccourcir les chemins.
-const PROPERTY_VALUE = '200';
+// CMake requires a value >= 128. Using 128 (minimum valid) to keep object paths short
+// and avoid exceeding Windows MAX_PATH (260 chars) for projects in deep directories.
+const PROPERTY_VALUE = '128';
 
 /**
  * Réduit la longueur maximale des chemins d'objets CMake sous Windows.

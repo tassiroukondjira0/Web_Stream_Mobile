@@ -2,6 +2,7 @@
  * Incrémente automatiquement la version de l'application.
  *
  * Par défaut, incrémente le patch : 1.1.0 → 1.1.1
+ * Quand le patch atteint 9, le prochain incrément passe au minor : 1.1.9 → 1.2.0
  * Avec --minor : 1.1.0 → 1.2.0
  * Avec --major : 1.1.0 → 2.0.0
  *
@@ -26,7 +27,7 @@ const buildGradlePath = path.join(__dirname, '..', 'android', 'app', 'build.grad
 
 // Déterminer le type d'incrémentation
 const args = process.argv.slice(2);
-const bumpType = args[0] === '--minor' ? 'minor' : args[0] === '--major' ? 'major' : 'patch';
+let requestedBumpType = args[0] === '--minor' ? 'minor' : args[0] === '--major' ? 'major' : 'patch';
 
 function parseVersion(version) {
   const parts = version.split('.').map(Number);
@@ -69,6 +70,15 @@ if (!currentVersion) {
 
 console.log(`   Version actuelle : ${currentVersion}`);
 
+// Si le type demandé est "patch" et que le patch est à 9, passer automatiquement au minor
+let bumpType = requestedBumpType;
+if (requestedBumpType === 'patch') {
+  const { patch } = parseVersion(currentVersion);
+  if (patch >= 9) {
+    bumpType = 'minor';
+  }
+}
+
 // Calculer la nouvelle version
 const newVersion = bumpVersion(currentVersion, bumpType);
 const newVersionCode = getVersionCode(newVersion);
@@ -89,23 +99,29 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 packageJson.version = newVersion;
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n', 'utf-8');
 
-// Mettre à jour android/app/build.gradle
-console.log('✏️  Mise à jour de android/app/build.gradle...');
-let buildGradle = fs.readFileSync(buildGradlePath, 'utf-8');
+// Mettre à jour android/app/build.gradle (seulement si le fichier existe)
+if (fs.existsSync(buildGradlePath)) {
+  console.log('✏️  Mise à jour de android/app/build.gradle...');
+  let buildGradle = fs.readFileSync(buildGradlePath, 'utf-8');
 
-// Remplacer versionName
-buildGradle = buildGradle.replace(
-  /versionName\s+"[^"]*"/,
-  `versionName "${newVersion}"`
-);
+  // Remplacer versionName
+  buildGradle = buildGradle.replace(
+    /versionName\s+"[^"]*"/,
+    `versionName "${newVersion}"`
+  );
 
-// Remplacer versionCode
-buildGradle = buildGradle.replace(
-  /versionCode\s+\d+/,
-  `versionCode ${newVersionCode}`
-);
+  // Remplacer versionCode
+  buildGradle = buildGradle.replace(
+    /versionCode\s+\d+/,
+    `versionCode ${newVersionCode}`
+  );
 
-fs.writeFileSync(buildGradlePath, buildGradle, 'utf-8');
+  fs.writeFileSync(buildGradlePath, buildGradle, 'utf-8');
+} else {
+  console.log('⏭️  android/app/build.gradle non trouvé — sauté (Expo managed)');
+}
+
+const gradleExists = fs.existsSync(buildGradlePath);
 
 console.log('');
 console.log('✅ Version incrémentée avec succès !');
@@ -115,9 +131,15 @@ console.log('');
 console.log('📝 Fichiers modifiés :');
 console.log(`   - app.json`);
 console.log(`   - package.json`);
-console.log(`   - android/app/build.gradle`);
+if (gradleExists) {
+  console.log(`   - android/app/build.gradle`);
+}
 console.log('');
 console.log('⚠️  N\'oubliez pas de commit ces changements avant de builder :');
-console.log(`   git add app.json package.json android/app/build.gradle`);
+if (gradleExists) {
+  console.log(`   git add app.json package.json android/app/build.gradle`);
+} else {
+  console.log(`   git add app.json package.json`);
+}
 console.log(`   git commit -m "Bump version to ${newVersion}"`);
 console.log(`   git push`);
