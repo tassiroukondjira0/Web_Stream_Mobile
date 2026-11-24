@@ -2,11 +2,12 @@
   "expo": {
     "name": "CinéMax",
     "slug": "cinemax-mobile",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "cinemax",
     "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.cinemax.app",
