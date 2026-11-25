@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  FlatList,
   RefreshControl,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -12,10 +12,36 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { ArrowLeft, Database, Eye, EyeOff, Plus, Search, Trash2 } from 'lucide-react-native';
+import { ArrowLeft, Database, Eye, EyeOff, Search, Trash2 } from 'lucide-react-native';
 import { Api } from '@/services/api';
 import { AdminMediaItem } from '@/types/media';
 import { colors } from '@/theme/theme';
+
+const getTypeColor = (type: string) => {
+  switch (type) {
+    case 'MOVIE': return '#3b82f6';
+    case 'SERIES': return '#a855f7';
+    case 'ANIME': return '#06b6d4';
+    default: return colors.textSecondary;
+  }
+};
+
+const normalize = (value: string) => {
+  const lowerValue = value.toLowerCase();
+  const normalized = typeof lowerValue.normalize === 'function'
+    ? lowerValue.normalize('NFD')
+    : lowerValue
+      .replace(/[àáâãäå]/g, 'a')
+      .replace(/[èéêë]/g, 'e')
+      .replace(/[ìíîï]/g, 'i')
+      .replace(/[òóôõö]/g, 'o')
+      .replace(/[ùúûü]/g, 'u')
+      .replace(/[ýÿ]/g, 'y')
+      .replace(/ç/g, 'c')
+      .replace(/ñ/g, 'n');
+
+  return normalized.replace(/[\u0300-\u036f]/g, '');
+};
 
 export default function AdminMediasScreen() {
   const router = useRouter();
@@ -24,43 +50,50 @@ export default function AdminMediasScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
-  const loadMedias = useCallback(async (p: number = 1) => {
+  const loadMedias = useCallback(async () => {
     try {
-      const data = await Api.getAdminMedias(p, 24, search || undefined);
-      setMedias(data.items);
-      setTotalPages(data.totalPages);
-      setPage(p);
+      const items = await Api.getAdminMedias();
+      setMedias(items);
     } catch (e: any) {
       Alert.alert('Erreur', e?.message || 'Impossible de charger les médias.');
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [search]);
+  }, []);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadMedias();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadMedias();
+    }
   }, [loadMedias]);
+
+  // Le backend ne filtre pas : la recherche se fait localement.
+  const filteredMedias = useMemo(() => {
+    const q = normalize(search.trim());
+    if (!q) return medias;
+    return medias.filter((m) => normalize(m.title ?? '').includes(q));
+  }, [medias, search]);
 
   const onRefresh = () => {
     setRefreshing(true);
-    loadMedias(1);
+    loadMedias();
   };
 
   const togglePublish = async (item: AdminMediaItem) => {
     try {
-      await Api.updateAdminMedia(item.id, { isPublished: !item.isPublished });
+      await Api.updateAdminMedia(item.slug, { isPublished: !item.isPublished });
       Alert.alert('Succès', `"${item.title}" ${!item.isPublished ? 'publié' : 'masqué'}.`);
-      loadMedias(page);
+      loadMedias();
     } catch (e: any) {
       Alert.alert('Erreur', e?.message || 'Impossible de mettre à jour.');
     }
   };
 
-  const deleteMedia = async (item: AdminMediaItem) => {
+  const deleteMedia = (item: AdminMediaItem) => {
     Alert.alert(
       'Supprimer',
       `Supprimer "${item.title}" ?`,
@@ -71,9 +104,9 @@ export default function AdminMediasScreen() {
           style: 'destructive',
           onPress: async () => {
             try {
-              await Api.deleteAdminMedia(item.id);
+              await Api.deleteAdminMedia(item.slug);
               Alert.alert('Succès', 'Média supprimé.');
-              loadMedias(page);
+              loadMedias();
             } catch (e: any) {
               Alert.alert('Erreur', e?.message || 'Impossible de supprimer.');
             }
@@ -83,14 +116,49 @@ export default function AdminMediasScreen() {
     );
   };
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'MOVIE': return '#3b82f6';
-      case 'SERIES': return '#a855f7';
-      case 'ANIME': return '#06b6d4';
-      default: return colors.textSecondary;
-    }
-  };
+  const renderItem = ({ item: m }: { item: AdminMediaItem }) => (
+    <View style={styles.mediaCard}>
+      <View style={styles.mediaInfo}>
+        <View style={styles.mediaTitleRow}>
+          <Text style={styles.mediaTitle} numberOfLines={1}>{m.title}</Text>
+          <View style={[styles.typeBadge, { backgroundColor: getTypeColor(m.type) + '20' }]}>
+            <Text style={[styles.typeText, { color: getTypeColor(m.type) }]}>{m.type}</Text>
+          </View>
+        </View>
+        <Text style={styles.mediaMeta}>
+          {m.releaseYear || '—'} · {m.accessLevel === 'PREMIUM' ? '👑 Premium' : '🆓 Gratuit'}
+          {m.isPublished ? ' · ✅' : ' · ❌'}
+        </Text>
+        {m.synopsis ? (
+          <Text style={styles.mediaSynopsis} numberOfLines={2}>{m.synopsis}</Text>
+        ) : null}
+      </View>
+      <View style={styles.mediaActions}>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: m.isPublished ? '#10b98120' : '#f59e0b20' }]}
+          onPress={() => togglePublish(m)}
+          activeOpacity={0.7}
+        >
+          {m.isPublished ? (
+            <EyeOff color="#f59e0b" size={16} />
+          ) : (
+            <Eye color="#10b981" size={16} />
+          )}
+          <Text style={[styles.actionText, { color: m.isPublished ? '#f59e0b' : '#10b981' }]}>
+            {m.isPublished ? 'Masquer' : 'Publier'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: '#ef444420' }]}
+          onPress={() => deleteMedia(m)}
+          activeOpacity={0.7}
+        >
+          <Trash2 color="#ef4444" size={16} />
+          <Text style={[styles.actionText, { color: '#ef4444' }]}>Supprimer</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -102,10 +170,9 @@ export default function AdminMediasScreen() {
           <View style={styles.headerTitleWrap}>
             <Database color="#3b82f6" size={18} />
             <Text style={styles.headerTitle}>Médias</Text>
+            {!loading ? <Text style={styles.countText}>({filteredMedias.length})</Text> : null}
           </View>
-          <TouchableOpacity onPress={() => router.push('/admin/medias' as any)} style={styles.addBtn} activeOpacity={0.7}>
-            <Plus color={colors.primaryForeground} size={18} />
-          </TouchableOpacity>
+          <View style={styles.headerSpacer} />
         </View>
         <View style={styles.searchWrap}>
           <Search color={colors.textTertiary} size={16} />
@@ -115,75 +182,34 @@ export default function AdminMediasScreen() {
             placeholderTextColor={colors.textTertiary}
             value={search}
             onChangeText={setSearch}
-            onSubmitEditing={() => loadMedias(1)}
             returnKeyType="search"
           />
         </View>
       </View>
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}
-        showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} />}
-      >
-        {loading ? (
-          <View style={styles.loadingWrap}>
-            <ActivityIndicator size="large" color={colors.primary} />
-          </View>
-        ) : medias.length === 0 ? (
-          <Text style={styles.emptyText}>Aucun média trouvé.</Text>
-        ) : (
-          <View style={styles.list}>
-            {medias.map((m) => (
-              <View key={m.id} style={styles.mediaCard}>
-                <View style={styles.mediaInfo}>
-                  <View style={styles.mediaTitleRow}>
-                    <Text style={styles.mediaTitle} numberOfLines={1}>{m.title}</Text>
-                    <View style={[styles.typeBadge, { backgroundColor: getTypeColor(m.type) + '20' }]}>
-                      <Text style={[styles.typeText, { color: getTypeColor(m.type) }]}>{m.type}</Text>
-                    </View>
-                  </View>
-                  <Text style={styles.mediaMeta}>
-                    {m.releaseYear || '—'} · {m.accessLevel === 'PREMIUM' ? '👑 Premium' : '🆓 Gratuit'}
-                    {m.isPublished ? ' · ✅' : ' · ❌'}
-                  </Text>
-                  {m.synopsis && (
-                    <Text style={styles.mediaSynopsis} numberOfLines={2}>{m.synopsis}</Text>
-                  )}
-                </View>
-                <View style={styles.mediaActions}>
-                  <TouchableOpacity
-                    style={[styles.actionBtn, { backgroundColor: m.isPublished ? '#10b98120' : '#f59e0b20' }]}
-                    onPress={() => togglePublish(m)}
-                    activeOpacity={0.7}
-                  >
-                    {m.isPublished ? (
-                      <EyeOff color="#f59e0b" size={16} />
-                    ) : (
-                      <Eye color="#10b981" size={16} />
-                    )}
-                    <Text style={[styles.actionText, { color: m.isPublished ? '#f59e0b' : '#10b981' }]}>
-                      {m.isPublished ? 'Masquer' : 'Publier'}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[styles.actionBtn, { backgroundColor: '#ef444420' }]}
-                    onPress={() => deleteMedia(m)}
-                    activeOpacity={0.7}
-                  >
-                    <Trash2 color="#ef4444" size={16} />
-                    <Text style={[styles.actionText, { color: '#ef4444' }]}>Supprimer</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
-          </View>
-        )}
-      </ScrollView>
+      {loading ? (
+        <View style={styles.loadingWrap}>
+          <ActivityIndicator size="large" color={colors.primary} />
+        </View>
+      ) : (
+        <FlatList
+          style={styles.scroll}
+          data={filteredMedias}
+          keyExtractor={(m) => m.id}
+          renderItem={renderItem}
+          contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 32 }]}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          initialNumToRender={12}
+          windowSize={7}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} />}
+          ListEmptyComponent={<Text style={styles.emptyText}>Aucun média trouvé.</Text>}
+        />
+      )}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -223,13 +249,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
   },
-  addBtn: {
+  countText: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  headerSpacer: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   searchWrap: {
     flexDirection: 'row',

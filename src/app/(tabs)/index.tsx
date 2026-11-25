@@ -18,6 +18,7 @@ import { MediaRow } from '@/components/MediaRow';
 import { FeaturedRotation } from '@/components/FeaturedRotation';
 import { GenreChips } from '@/components/GenreChips';
 import { PlatformSections } from '@/components/PlatformSection';
+import AdMobBanner from '@/components/AdMobBanner';
 import { useNotifications } from '@/context/NotificationContext';
 import { colors } from '@/theme/theme';
 
@@ -138,6 +139,8 @@ export default function HomeScreen() {
 
       {/* Genre chips — filtres par genre avec icônes */}
       <GenreChips selectedGenre={selectedGenre} onSelect={setSelectedGenre} />
+
+      <AdMobBanner />
 
       {/* Movie rows */}
       <MediaRow title="Films" items={movies} />

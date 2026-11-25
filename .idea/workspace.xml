@@ -13,14 +13,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f93001ee-376e-45ef-8a66-b08da0dba8d9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eas.json" beforeDir="false" afterPath="$PROJECT_DIR$/eas.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/withCmakeObjectPathMax.js" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/withCmakeObjectPathMax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/build-and-publish.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/build-and-publish.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/bump-version.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/bump-version.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/animes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/animes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/films.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/films.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/series.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/series.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/medias.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/medias.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/provider-assets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/provider-assets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/reviews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/reviews.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/sync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/sync.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/media.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/media.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +41,19 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_C:/Users/USER/Downloads/Web_Stream_Mobile" value="3M1MswP4MpHUgIft27ExiOQhX3X" />
+      <entry key="_C:/Web_Stream_Mobile" value="3MZBMWE90clYzkAauI1gP8D8aEZ" />
     </persistenceIdMap>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2187" />
+    <option name="cachedIndexableFilesCount" value="1718" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,61 +64,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000289078256748" />
-      <entry key="MS500" value="1.1577884881618714" />
-      <entry key="S2" value="2.316880470149711" />
-      <entry key="S5" value="4.032978796177185" />
-      <entry key="S10" value="6.244316359391953" />
-      <entry key="S30" value="9.990455194707092" />
-      <entry key="S60" value="12.533030444416571" />
-      <entry key="M2" value="15.998872698292038" />
-      <entry key="M5" value="22.658484422877095" />
-      <entry key="M10" value="31.668867755188682" />
-      <entry key="M15" value="40.672765298657055" />
-      <entry key="M30" value="70.11282894276133" />
-      <entry key="H1" value="119.3343733952015" />
-      <entry key="H2" value="173.6616024328277" />
-      <entry key="H4" value="221.62293253683796" />
-      <entry key="D1" value="728.5521625721145" />
-      <entry key="W1" value="2509.1670116567298" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000002232127572" />
+      <entry key="S2" value="1.0291324843591796" />
+      <entry key="S5" value="1.417013807163935" />
+      <entry key="S10" value="2.0917634598536647" />
+      <entry key="S30" value="3.1319873800401985" />
+      <entry key="S60" value="3.638855954077045" />
+      <entry key="M2" value="4.74446163637195" />
+      <entry key="M5" value="8.292542029177028" />
+      <entry key="M10" value="12.173198992967496" />
+      <entry key="M15" value="15.794568000953605" />
+      <entry key="M30" value="26.76297140812979" />
+      <entry key="H1" value="45.850755231615494" />
+      <entry key="H2" value="86.29410095608951" />
+      <entry key="H4" value="167.91300895121535" />
+      <entry key="D1" value="757.1470000317513" />
+      <entry key="W1" value="2636.509844901753" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="3.143324743196038E-288" />
-      <entry key="S5" value="9.975983001732105E-116" />
-      <entry key="S10" value="3.158477956505648E-58" />
-      <entry key="S30" value="6.810190859130401E-20" />
-      <entry key="S60" value="2.609634238572602E-10" />
-      <entry key="M2" value="1.615436237854221E-5" />
-      <entry key="M5" value="0.01211479105842898" />
-      <entry key="M10" value="0.1100672115501659" />
-      <entry key="M15" value="0.2296705494846488" />
-      <entry key="M30" value="0.4792395533390883" />
-      <entry key="H1" value="0.6922713003866965" />
-      <entry key="H2" value="0.8320284252275862" />
-      <entry key="H4" value="0.9121559216196423" />
-      <entry key="D1" value="1.0048336076759559" />
-      <entry key="W1" value="1.5698403179283282" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="4.822756702231421E-183" />
+      <entry key="M2" value="6.944607045925206E-92" />
+      <entry key="M5" value="3.440797156556768E-37" />
+      <entry key="M10" value="5.865830850405399E-19" />
+      <entry key="M15" value="7.007337310897341E-13" />
+      <entry key="M30" value="8.370983998848263E-7" />
+      <entry key="H1" value="9.14930816993734E-4" />
+      <entry key="H2" value="0.030247823343072744" />
+      <entry key="H4" value="0.17391901376034055" />
+      <entry key="D1" value="0.7623255616557661" />
+      <entry key="W1" value="1.5091042433712" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.823615665088388" />
-      <entry key="MS500" value="1.1147450652710116" />
-      <entry key="S2" value="2.296075739623171" />
-      <entry key="S5" value="4.018071235274914" />
-      <entry key="S10" value="6.232264044609663" />
-      <entry key="S30" value="9.980994020056809" />
-      <entry key="S60" value="12.520824095397607" />
-      <entry key="M2" value="15.986464322412617" />
-      <entry key="M5" value="22.660344070813967" />
-      <entry key="M10" value="31.768208197547423" />
-      <entry key="M15" value="40.89142945697994" />
-      <entry key="M30" value="70.58204620243673" />
-      <entry key="H1" value="120.01911591463507" />
-      <entry key="H2" value="174.48879492679822" />
-      <entry key="H4" value="222.53227518104174" />
-      <entry key="D1" value="729.5558841814867" />
-      <entry key="W1" value="2510.736472086822" />
+      <entry key="MS100" value="0.8526348917679567" />
+      <entry key="MS500" value="0.968618401256415" />
+      <entry key="S2" value="1.0176434824622338" />
+      <entry key="S5" value="1.372771148140279" />
+      <entry key="S10" value="2.024572236312344" />
+      <entry key="S30" value="3.0834150554427127" />
+      <entry key="S60" value="3.6083078027354665" />
+      <entry key="M2" value="4.723249175623018" />
+      <entry key="M5" value="8.276370132134108" />
+      <entry key="M10" value="12.161211230474274" />
+      <entry key="M15" value="15.784936544076468" />
+      <entry key="M30" value="26.75673953532803" />
+      <entry key="H1" value="45.847785776248536" />
+      <entry key="H2" value="86.32165838327911" />
+      <entry key="H4" value="168.0847688101632" />
+      <entry key="D1" value="757.9081100128874" />
+      <entry key="W1" value="2638.0185272050303" />
     </decayedShown>
   </component>
   <component name="PackageJsonUpdateNotifier">
@@ -112,12 +132,13 @@
   <component name="ProjectSessionTemplates">
     <option name="panelTemplate">
       <template>
-        <option name="ensembleEnabled" value="false" />
+        <option name="ensembleEnabled" value="true" />
+        <option name="ensembleTierId" value="balance" />
         <option name="modeId" value="Agent" />
         <option name="model">
           <model>
             <option name="modelType" value="builtin_id" />
-            <option name="modelValue" value="auto" />
+            <option name="modelValue" value="ensemble" />
           </model>
         </option>
         <option name="targetType" value="BACKGROUND" />
@@ -151,36 +172,12 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.air.settings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\USER\\Downloads\\Web_Stream_Mobile\\node_modules\\typescript\\lib&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="Web_Stream_Mobile" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="RUN_TOOL" value="" />
-      <option name="RUN_AS_SCRIPT" value="" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -198,7 +195,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-WS-263.7307.202" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-WS-263.7307.348" />
       </set>
     </attachedChunks>
   </component>
@@ -230,7 +227,12 @@
       <workItem from="1795393870523" duration="1887000" />
       <workItem from="1795396088288" duration="2611000" />
       <workItem from="1795399737733" duration="3232000" />
-      <workItem from="1795423954527" duration="4350000" />
+      <workItem from="1795423954527" duration="10401000" />
+      <workItem from="1795524166747" duration="622000" />
+      <workItem from="1795524903275" duration="3179000" />
+      <workItem from="1795548124423" duration="401000" />
+      <workItem from="1795548905101" duration="365000" />
+      <workItem from="1795549363315" duration="17543000" />
     </task>
     <servers />
   </component>

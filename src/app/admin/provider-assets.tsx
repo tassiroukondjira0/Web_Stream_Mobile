@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -25,13 +25,10 @@ export default function AdminProviderAssetsScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
   const loadAssets = useCallback(async (p: number = 1) => {
     try {
       const data = await Api.getProviderAssets(p, 24, undefined, search || undefined);
       setAssets(data.items);
-      setTotalPages(data.totalPages);
       setPage(p);
     } catch (e: any) {
       Alert.alert('Erreur', e?.message || 'Impossible de charger les assets.');
@@ -41,8 +38,12 @@ export default function AdminProviderAssetsScreen() {
     }
   }, [search]);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadAssets();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadAssets();
+    }
   }, [loadAssets]);
 
   const onRefresh = () => {

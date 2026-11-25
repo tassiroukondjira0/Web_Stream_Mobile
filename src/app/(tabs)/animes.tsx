@@ -12,6 +12,7 @@ import { deduplicateMediaItems } from '@/services/media.utils';
 import { getCatalogCached, clearCacheForType } from '@/services/media.cache';
 import { MediaItem } from '@/types/media';
 import { MediaRow } from '@/components/MediaRow';
+import AdMobBanner from '@/components/AdMobBanner';
 import { colors } from '@/theme/theme';
 
 const ITEMS_PER_CATEGORY = 12;
@@ -105,6 +106,8 @@ export default function AnimesScreen() {
     >
       <Text style={styles.pageTitle}>Catalogue des Animés</Text>
       <Text style={styles.pageSubtitle}>Les meilleurs animés en streaming.</Text>
+
+      <AdMobBanner />
 
       {ANIME_CATEGORIES.map((cat) => (
         <MediaRow

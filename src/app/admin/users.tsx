@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -36,8 +36,12 @@ export default function AdminUsersScreen() {
     }
   }, []);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadUsers();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadUsers();
+    }
   }, [loadUsers]);
 
   const onRefresh = () => {

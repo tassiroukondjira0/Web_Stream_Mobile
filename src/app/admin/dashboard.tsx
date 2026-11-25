@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -57,8 +57,12 @@ export default function AdminDashboardScreen() {
     }
   }, []);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadStats();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadStats();
+    }
   }, [loadStats]);
 
   const onRefresh = () => {
@@ -178,7 +182,7 @@ export default function AdminDashboardScreen() {
 
             {/* Admin menu */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Menu d'administration</Text>
+              <Text style={styles.sectionTitle}>Menu d&apos;administration</Text>
               {adminMenuItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -214,7 +218,7 @@ export default function AdminDashboardScreen() {
                 activeOpacity={0.7}
               >
                 <Send color={colors.primaryForeground} size={18} />
-                <Text style={styles.shareBtnText}>Partager l'application</Text>
+                <Text style={styles.shareBtnText}>Partager l&apos;application</Text>
               </TouchableOpacity>
             </View>
           </>

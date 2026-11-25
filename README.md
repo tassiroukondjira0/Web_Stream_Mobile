@@ -7,9 +7,7 @@ Application mobile native de streaming vidéo pour CinéMax, connectée à l'API
 ## 🚀 Démarrage rapide
 
 ### 1. Prérequis
-Installez l'application **Expo Go** sur votre smartphone :
-- [Expo Go sur Android (Google Play)](https://play.google.com/store/apps/details?id=host.exp.exponent)
-- [Expo Go sur iOS (App Store)](https://apps.apple.com/app/expo-go/id982107779)
+L'intégration AdMob utilise un module natif : **Expo Go ne peut pas afficher les publicités**. Lancez une development build avec `npx expo run:android` / `npx expo run:ios`, ou créez-la avec EAS.
 
 ### 2. Configuration de l'API
 Le fichier `.env` est déjà configuré :
@@ -20,14 +18,28 @@ EXPO_PUBLIC_API_URL=https://web-stream-mncx.onrender.com
 > - Sur **Android Emulator** : `http://10.0.2.2:3000`
 > - Sur **Téléphone physique** : `http://<IP-DE-VOTRE-PC>:3000` (ex: `http://192.168.1.50:3000`)
 
-### 3. Lancer l'application
+### 3. Configuration AdMob
+Créez les applications Android et iOS dans AdMob avec les identifiants de l'application (`com.cinemax.app`), puis créez des unités publicitaires **Bannière** et **App Open** pour chaque plateforme. Ajoutez les valeurs suivantes à votre `.env` local (ou configurez-les comme variables d'environnement EAS) :
+
+```env
+EXPO_PUBLIC_ADMOB_ANDROID_APP_ID=ca-app-pub-...~...
+EXPO_PUBLIC_ADMOB_IOS_APP_ID=ca-app-pub-...~...
+EXPO_PUBLIC_ADMOB_ANDROID_APP_OPEN_ID=ca-app-pub-.../...
+EXPO_PUBLIC_ADMOB_IOS_APP_OPEN_ID=ca-app-pub-.../...
+EXPO_PUBLIC_ADMOB_ANDROID_BANNER_ID=ca-app-pub-.../...
+EXPO_PUBLIC_ADMOB_IOS_BANNER_ID=ca-app-pub-.../...
+```
+
+Les **App IDs** se trouvent dans les paramètres de l'application AdMob; les **IDs d'unités** se trouvent dans les détails de chaque bannière ou unité App Open. Ce sont deux types d'identifiants différents. En développement, l'application utilise les unités de test officielles de Google. En production, les annonces restent masquées si l'App ID ou l'unité de la plateforme manque. Les App IDs natifs sont intégrés au build via `app.config.js` : toute modification nécessite un nouveau build natif. L'annonce App Open peut apparaître à l'ouverture après le premier lancement, puis au retour de l'application au premier plan; elle ne s'affiche pas aux comptes Premium ni dans le lecteur vidéo.
+
+Configurez également les messages de confidentialité/consentement UMP dans la console AdMob. L'application présente le formulaire requis avant d'initialiser le SDK et ne demande pas de publicité lorsque le consentement ne l'autorise pas.
+
+### 4. Lancer l'application
 Dans ce dossier :
 ```bash
 npm start
 ```
-1. Un **QR code** s'affiche dans votre terminal.
-2. Ouvrez l'application **Expo Go** sur votre téléphone et scannez le QR code.
-3. L'application se charge instantanément sur votre mobile !
+Lancez l'application sur un appareil ou un émulateur via la development build; Expo Go n'inclut pas le SDK AdMob.
 
 ---
 

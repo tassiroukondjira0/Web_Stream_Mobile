@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from '@/context/AuthContext';
 import { NotificationProvider } from '@/context/NotificationContext';
 import { Api } from '@/services/api';
+import AdMobAppOpen from '@/components/AdMobAppOpen';
 
 const LAST_BUILD_DATE_KEY = '@cinemax_last_build_date';
 
@@ -167,6 +168,7 @@ export default function RootLayout() {
             />
             <Stack.Screen name="download" />
           </Stack>
+          <AdMobAppOpen isWakingServer={isWakingServer} />
           </SafeAreaProvider>
         </ThemeProvider>
       </NotificationProvider>

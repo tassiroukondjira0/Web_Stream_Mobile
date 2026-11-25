@@ -518,10 +518,10 @@ export const Api = {
   },
 
   // Media management
-  async getAdminMedias(page: number = 1, pageSize: number = 24, q?: string): Promise<AdminMediaListResponse> {
-    const params = new URLSearchParams({ page: String(page), pageSize: String(pageSize) });
-    if (q) params.set('q', q);
-    return request<AdminMediaListResponse>(`/api/admin/medias?${params.toString()}`);
+  // Le backend renvoie tout le catalogue admin ({ medias, stats }), sans pagination ni recherche.
+  async getAdminMedias(): Promise<AdminMediaItem[]> {
+    const data = await request<AdminMediaListResponse>('/api/admin/medias');
+    return Array.isArray(data?.medias) ? data.medias : [];
   },
 
   async createAdminMedia(media: Omit<AdminMediaItem, 'id'>): Promise<{ success: boolean; media: AdminMediaItem }> {
@@ -531,15 +531,17 @@ export const Api = {
     });
   },
 
-  async updateAdminMedia(id: string, data: Partial<AdminMediaItem>): Promise<{ success: boolean; media: AdminMediaItem }> {
-    return request<{ success: boolean; media: AdminMediaItem }>(`/api/admin/medias/${encodeURIComponent(id)}`, {
+  // PATCH /api/admin/medias — le média est identifié par son slug dans le body.
+  async updateAdminMedia(slug: string, data: Partial<AdminMediaItem>): Promise<{ success: boolean; media: AdminMediaItem }> {
+    return request<{ success: boolean; media: AdminMediaItem }>('/api/admin/medias', {
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, slug }),
     });
   },
 
-  async deleteAdminMedia(id: string): Promise<{ success: boolean }> {
-    return request<{ success: boolean }>(`/api/admin/medias/${encodeURIComponent(id)}`, {
+  // DELETE /api/admin/medias?slug=...
+  async deleteAdminMedia(slug: string): Promise<{ success: boolean }> {
+    return request<{ success: boolean }>(`/api/admin/medias?slug=${encodeURIComponent(slug)}`, {
       method: 'DELETE',
     });
   },
@@ -663,7 +665,7 @@ export const Api = {
 
   // Import — Manual
   async importManual(
-    items: Array<Record<string, unknown>>
+    items: Record<string, unknown>[]
   ): Promise<{ success: boolean; message: string; report: Record<string, unknown> }> {
     return request<{ success: boolean; message: string; report: Record<string, unknown> }>('/api/admin/import/manual', {
       method: 'POST',

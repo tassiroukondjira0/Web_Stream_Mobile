@@ -1,6 +1,5 @@
 import React from 'react';
-import { Stack, useRouter } from 'expo-router';
-import { useFocusEffect } from 'expo-router';
+import { Stack, useRouter, useFocusEffect } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
 
 export default function AdminLayout() {

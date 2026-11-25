@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -35,8 +35,12 @@ export default function AdminReviewsScreen() {
     }
   }, []);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadReviews();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadReviews();
+    }
   }, [loadReviews]);
 
   const onRefresh = () => {

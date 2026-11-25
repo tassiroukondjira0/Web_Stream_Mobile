@@ -145,6 +145,7 @@ export interface AdminStatsResponse {
 
 export interface AdminMediaItem {
   id: string;
+  slug: string;
   title: string;
   type: 'MOVIE' | 'SERIES' | 'ANIME';
   posterUrl: string | null;
@@ -155,16 +156,21 @@ export interface AdminMediaItem {
   videoUrl: string | null;
   accessLevel: 'FREE' | 'PREMIUM';
   isPublished: boolean;
-  categories: string[];
-  episodeSources: { season: number; episode: number; videoUrl: string }[];
+  rightsValidUntil?: string | null;
+  categories: { name: string; slug: string }[];
+  episodeSources: { seasonNumber: number; episodeNumber: number; title?: string; videoUrl: string }[];
 }
 
+/** Réponse de GET /api/admin/medias : catalogue complet, sans pagination. */
 export interface AdminMediaListResponse {
-  items: AdminMediaItem[];
-  page: number;
-  pageSize: number;
-  totalItems: number;
-  totalPages: number;
+  medias: AdminMediaItem[];
+  stats?: {
+    totalMedias: number;
+    published: number;
+    premium: number;
+    free: number;
+    partnerTotal: number;
+  };
 }
 
 export interface AdminReview {

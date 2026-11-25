@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
-  RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
@@ -62,8 +61,12 @@ export default function AdminSyncScreen() {
     }
   }, []);
 
+  const initialLoadDone = useRef(false);
   useEffect(() => {
-    loadAll();
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      loadAll();
+    }
   }, [loadAll]);
 
   const runSync = async (provider: SyncProvider) => {

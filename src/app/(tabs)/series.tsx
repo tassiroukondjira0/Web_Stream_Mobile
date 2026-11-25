@@ -13,6 +13,7 @@ import { getCatalogCached, clearCacheForType } from '@/services/media.cache';
 import { MediaItem } from '@/types/media';
 import { MediaRow } from '@/components/MediaRow';
 import { GenreChips } from '@/components/GenreChips';
+import AdMobBanner from '@/components/AdMobBanner';
 import { colors } from '@/theme/theme';
 
 const ITEMS_PER_CATEGORY = 12;
@@ -107,6 +108,8 @@ export default function SeriesScreen() {
     >
       <Text style={styles.pageTitle}>Catalogue des Séries</Text>
       <Text style={styles.pageSubtitle}>Découvrez les meilleures séries en streaming.</Text>
+
+      <AdMobBanner />
 
       {/* Genre chips — filtres par genre */}
       <GenreChips selectedGenre={selectedGenre} onSelect={setSelectedGenre} />
